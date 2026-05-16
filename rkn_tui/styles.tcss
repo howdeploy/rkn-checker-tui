@@ -1,0 +1,46 @@
+/* Catppuccin Mocha palette */
+$bg: #1e1e2e;
+$surface: #313244;
+$overlay: #6c7086;
+$text: #cdd6f4;
+$subtext: #a6adc8;
+$mauve: #cba6f7;
+$blue: #89b4fa;
+$green: #a6e3a1;
+$yellow: #f9e2af;
+$peach: #fab387;
+$red: #f38ba8;
+$pink: #f5c2e7;
+
+Screen {
+    background: $bg;
+    color: $text;
+}
+
+Header {
+    background: $surface;
+    color: $mauve;
+}
+
+Footer {
+    background: $surface;
+    color: $subtext;
+}
+
+#stub-panel {
+    width: 60;
+    height: auto;
+    border: round $mauve;
+    padding: 1 2;
+    align: center middle;
+}
+
+#stub-title {
+    color: $mauve;
+    text-style: bold;
+}
+
+#stub-hint {
+    color: $subtext;
+    margin-top: 1;
+}

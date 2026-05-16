@@ -1,0 +1,61 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "rkn-checker-tui"
+version = "0.1.0"
+description = "Дружелюбный TUI поверх rkn-block-checker: меню, пресеты, история, понятные описания вердиктов."
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.10"
+authors = [{ name = "howdeploy" }]
+keywords = ["rkn", "tspu", "censorship", "tui", "textual", "diagnostics"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Environment :: Console :: Curses",
+    "Intended Audience :: End Users/Desktop",
+    "License :: OSI Approved :: MIT License",
+    "Natural Language :: Russian",
+    "Operating System :: POSIX :: Linux",
+    "Operating System :: MacOS",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Internet",
+    "Topic :: System :: Networking :: Monitoring",
+]
+dependencies = [
+    "rkn-block-checker>=0.5.0",
+    "textual>=8.2,<9",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4",
+    "pytest-cov>=4.1",
+    "textual-dev>=1.7",
+]
+
+[project.scripts]
+rkn-tui = "rkn_tui.app:main"
+
+[project.urls]
+Homepage = "https://github.com/howdeploy/rkn-checker-tui"
+Repository = "https://github.com/howdeploy/rkn-checker-tui"
+Issues = "https://github.com/howdeploy/rkn-checker-tui/issues"
+Upstream = "https://github.com/MayersScott/rkn-block-checker"
+
+[tool.setuptools.packages.find]
+include = ["rkn_tui*"]
+exclude = ["tests*"]
+
+[tool.setuptools.package-data]
+rkn_tui = ["*.tcss"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+addopts = "-ra --strict-markers"

@@ -1,0 +1,7 @@
+{
+  "venvPath": ".",
+  "venv": ".venv",
+  "include": ["rkn_tui", "tests"],
+  "exclude": ["**/__pycache__", ".venv"],
+  "pythonVersion": "3.13"
+}
