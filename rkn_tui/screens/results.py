@@ -23,7 +23,7 @@ from textual.containers import Container, Horizontal
 from textual.screen import Screen
 from textual.widgets import Button, DataTable, Footer, Header, Static
 
-from .. import diagnostics, engine, snapshots, verdicts
+from .. import diagnostics, engine, reports, snapshots, verdicts
 from ..engine import ScanRequest
 from ..vpn_check import ContextResult
 
@@ -62,6 +62,7 @@ class ResultsScreen(Screen):
         Binding("a", "set_filter('all')", "Все", show=False),
         Binding("o", "set_filter('ok')", "OK", show=False),
         Binding("b", "set_filter('blocked')", "Блок", show=False),
+        Binding("r", "show_report", "Отчёт", show=False),
         Binding("s", "save_snapshot", "Снапшот", show=False),
     ]
 
@@ -73,6 +74,10 @@ class ResultsScreen(Screen):
         *,
         request: Optional[ScanRequest] = None,
         context_result: Optional[ContextResult] = None,
+        self_info: Optional[dict] = None,
+        context_headline: str = "",
+        context_detail: str = "",
+        report_diagnostics: Optional[dict] = None,
         read_only: bool = False,
         title: Optional[str] = None,
     ) -> None:
@@ -80,6 +85,10 @@ class ResultsScreen(Screen):
         self.results = results
         self.request = request
         self.context_result = context_result
+        self.self_info = self_info
+        self.context_headline = context_headline
+        self.context_detail = context_detail
+        self.report_diagnostics = report_diagnostics
         self.read_only = read_only
         self.title_override = title
         self._filter = ResultFilter.ALL
@@ -103,6 +112,7 @@ class ResultsScreen(Screen):
             yield DataTable(id="results-table", zebra_stripes=True, cursor_type="row")
             with Horizontal(id="results-actions"):
                 yield Button("Назад (Esc)", id="results-back", variant="default")
+                yield Button("Отчёт (r)", id="results-report", variant="default")
                 if not self.read_only:
                     yield Button(
                         "Сохранить снапшот (s)",
@@ -237,9 +247,53 @@ class ResultsScreen(Screen):
             severity="information",
         )
 
+    def action_show_report(self) -> None:
+        from .report import ReportScreen
+
+        mode = self.request.mode.value if self.request else "both"
+        report = reports.render_report(
+            self.results,
+            request=self.request,
+            mode=mode,
+            self_info=self._report_self_info(),
+            context_headline=self._report_context_headline(),
+            context_detail=self._report_context_detail(),
+            diagnostics=self._report_diagnostics(),
+        )
+        self.app.push_screen(ReportScreen(report))
+
+    def _report_self_info(self) -> dict:
+        if self.self_info is not None:
+            return self.self_info
+        ctx = self.context_result or getattr(self.app, "context", None)
+        return ctx.self_info if ctx else {}
+
+    def _report_context_headline(self) -> str:
+        if self.context_headline:
+            return self.context_headline
+        ctx = self.context_result or getattr(self.app, "context", None)
+        return ctx.headline if ctx else ""
+
+    def _report_context_detail(self) -> str:
+        if self.context_detail:
+            return self.context_detail
+        ctx = self.context_result or getattr(self.app, "context", None)
+        return ctx.detail if ctx else ""
+
+    def _report_diagnostics(self) -> dict:
+        if self.report_diagnostics is not None:
+            return self.report_diagnostics
+        self.report_diagnostics = diagnostics.collect_diagnostics(
+            timeout=0.5,
+            results=self.results,
+        )
+        return self.report_diagnostics
+
     def on_button_pressed(self, event: Button.Pressed) -> None:
         if event.button.id == "results-back":
             self.action_back()
+        elif event.button.id == "results-report":
+            self.action_show_report()
         elif event.button.id == "flt-all":
             self.action_set_filter("all")
         elif event.button.id == "flt-ok":

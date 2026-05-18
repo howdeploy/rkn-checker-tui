@@ -297,6 +297,43 @@ VerdictDetailScreen {
     width: 100%;
 }
 
+/* --- Report modal --- */
+
+ReportScreen {
+    align: center middle;
+}
+
+#report-dialog {
+    width: 90%;
+    max-width: 112;
+    height: auto;
+    max-height: 88%;
+    border: round $blue;
+    background: $surface;
+    padding: 1 2;
+}
+
+#report-title {
+    color: $blue;
+    text-style: bold;
+    margin-bottom: 1;
+}
+
+#report-body {
+    height: auto;
+    max-height: 34;
+    padding-right: 1;
+}
+
+#report-text {
+    color: $text;
+}
+
+#report-close {
+    margin-top: 1;
+    width: 100%;
+}
+
 /* --- Ad-hoc --- */
 
 #adhoc-root {

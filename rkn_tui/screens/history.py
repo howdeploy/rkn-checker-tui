@@ -150,6 +150,10 @@ class HistoryScreen(Screen):
                 snap.results,
                 read_only=True,
                 title=title,
+                self_info=snap.self_info,
+                context_headline=snap.context_headline,
+                context_detail=snap.context_detail,
+                report_diagnostics=snap.diagnostics,
             )
         )
 
