@@ -113,6 +113,12 @@ def test_is_blocked_ignores_unknown():
     assert is_blocked(r) is False
 
 
+def test_is_blocked_ignores_down():
+    """DOWN — сайт лежит или не отвечает, но это не доказанная блокировка."""
+    r = CheckResult(name="x", url="x", verdict=Verdict.DOWN)
+    assert is_blocked(r) is False
+
+
 def test_summarize_groups_by_verdict():
     results = [
         CheckResult(name="a", url="a", verdict=Verdict.OK),

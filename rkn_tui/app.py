@@ -1,31 +1,32 @@
 from __future__ import annotations
 
-from textual.app import App, ComposeResult
-from textual.containers import Container
-from textual.widgets import Footer, Header, Static
+from textual.app import App
+from textual.binding import Binding
 
-from rkn_tui import __version__
+from rkn_tui import __version__, storage
+from rkn_tui.screens.splash import SplashScreen
 
 
 class RknTuiApp(App):
-    """Минимальный скелет TUI. На следующих этапах вырастет в полноценное меню."""
+    """Корень TUI: стартует со splash → main_menu → scanning/results."""
 
     CSS_PATH = "styles.tcss"
     TITLE = "rkn-tui"
-    SUB_TITLE = f"v{__version__} — скаффолд"
+    SUB_TITLE = f"v{__version__}"
 
-    BINDINGS = [("q", "quit", "Выход")]
+    BINDINGS = [
+        ("q", "quit", "Выход"),
+        Binding("ctrl+p", "command_palette", "Меню команд", priority=True),
+    ]
 
-    def compose(self) -> ComposeResult:
-        yield Header(show_clock=True)
-        with Container(id="stub-panel"):
-            yield Static("rkn-checker-tui", id="stub-title")
-            yield Static(
-                "Скаффолд работает. На следующих этапах появится меню,\n"
-                "сканер, история и понятные описания блокировок.",
-            )
-            yield Static("[Q] выход", id="stub-hint")
-        yield Footer()
+    def __init__(self) -> None:
+        super().__init__()
+        # Конфиг живет на уровне App — экраны видят актуальную версию,
+        # SettingsScreen мутирует тот же объект.
+        self.config = storage.load()
+
+    def on_mount(self) -> None:
+        self.push_screen(SplashScreen())
 
 
 def main() -> int:

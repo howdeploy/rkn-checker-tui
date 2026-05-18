@@ -11,7 +11,7 @@ from enum import Enum
 from typing import Iterator
 
 from rkn_checker.core import iter_check_urls, get_self_info
-from rkn_checker.models import CheckResult, Verdict
+from rkn_checker.models import BLOCKED_VERDICTS, CheckResult
 from rkn_checker.targets import BLACK_URLS, WHITE_URLS
 
 from .presets import DEFAULT, Preset
@@ -78,11 +78,10 @@ def fetch_self_info(timeout: float = 5.0) -> dict:
 def is_blocked(result: CheckResult) -> bool:
     """Считается ли вердикт «заблокировано».
 
-    OK и UNKNOWN считаем «не заблокирован» (UNKNOWN — служебный для ошибок).
-    Все остальные verdict'ы означают сломавшуюся пробу = блокировка или
-    проблема похожая на блокировку.
+    Семантика берется из апстрима. Важно: DOWN и UNKNOWN не считаются
+    блокировкой, потому что это либо лежащий сайт, либо внутренняя ошибка.
     """
-    return result.verdict not in (Verdict.OK, Verdict.UNKNOWN)
+    return result.verdict in BLOCKED_VERDICTS
 
 
 def summarize(results: list[CheckResult]) -> dict[str, int]:

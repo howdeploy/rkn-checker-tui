@@ -27,20 +27,525 @@ Footer {
     color: $subtext;
 }
 
-#stub-panel {
-    width: 60;
+/* --- Splash --- */
+
+#splash-panel {
+    width: 70;
     height: auto;
     border: round $mauve;
     padding: 1 2;
     align: center middle;
+    margin: 2 0;
 }
 
-#stub-title {
+#splash-title {
+    color: $mauve;
+    text-style: bold;
+    content-align: center middle;
+}
+
+#splash-sub {
+    color: $subtext;
+    margin-top: 1;
+    content-align: center middle;
+}
+
+#splash-hint {
+    color: $subtext;
+    margin-top: 1;
+    content-align: center middle;
+}
+
+/* --- Main menu --- */
+
+#menu-root {
+    padding: 1 2;
+    height: 1fr;
+}
+
+#status-card {
+    border: round $overlay;
+    padding: 1 2;
+    height: auto;
+    margin-bottom: 1;
+}
+
+#status-card.status-green {
+    border: round $green;
+}
+
+#status-card.status-yellow {
+    border: round $yellow;
+}
+
+#status-card.status-red {
+    border: round $red;
+}
+
+#status-card.status-neutral {
+    border: round $overlay;
+}
+
+#status-headline {
+    text-style: bold;
+    color: $text;
+}
+
+#status-card.status-green #status-headline {
+    color: $green;
+}
+
+#status-card.status-yellow #status-headline {
+    color: $yellow;
+}
+
+#status-card.status-red #status-headline {
+    color: $red;
+}
+
+#status-card.status-neutral #status-headline {
+    color: $subtext;
+}
+
+#status-self {
+    color: $subtext;
+    margin-top: 1;
+}
+
+#status-detail {
+    color: $text;
+    margin-top: 1;
+}
+
+#menu-row {
+    height: 1fr;
+}
+
+#menu-list {
+    width: 40;
+    border: round $overlay;
+    padding: 0 1;
+    margin-right: 1;
+}
+
+#menu-list > ListItem {
+    padding: 0 1;
+}
+
+#menu-list > ListItem.--highlight {
+    background: $surface;
     color: $mauve;
     text-style: bold;
 }
 
-#stub-hint {
+#menu-hint {
+    width: 1fr;
+    border: round $overlay;
+    padding: 1 2;
     color: $subtext;
+}
+
+/* --- Scanning --- */
+
+#scan-root {
+    padding: 1 2;
+    height: 1fr;
+}
+
+#scan-headline {
+    color: $mauve;
+    text-style: bold;
+    margin-bottom: 1;
+}
+
+#scan-progress {
+    margin-bottom: 0;
+}
+
+#scan-counter {
+    color: $subtext;
+    margin-bottom: 1;
+}
+
+#scan-table {
+    height: 1fr;
+    border: round $overlay;
+}
+
+#scan-actions {
+    height: auto;
     margin-top: 1;
+    align: right middle;
+}
+
+/* --- Results --- */
+
+#results-root {
+    padding: 1 2;
+    height: 1fr;
+}
+
+#results-summary {
+    color: $mauve;
+    text-style: bold;
+    margin-bottom: 1;
+}
+
+#results-filters {
+    height: auto;
+    margin-bottom: 1;
+}
+
+#results-filters Button {
+    margin-right: 1;
+}
+
+#results-filter-counter {
+    color: $subtext;
+    margin-left: 2;
+    content-align: left middle;
+    height: 3;
+}
+
+#results-table {
+    height: 1fr;
+    border: round $overlay;
+}
+
+#results-actions {
+    height: auto;
+    margin-top: 1;
+}
+
+#results-actions Button {
+    margin-right: 1;
+}
+
+/* --- Verdict detail modal --- */
+
+VerdictDetailScreen {
+    align: center middle;
+}
+
+#detail-dialog {
+    width: 80%;
+    max-width: 100;
+    height: auto;
+    max-height: 80%;
+    border: round $mauve;
+    background: $surface;
+    padding: 1 2;
+}
+
+#detail-body {
+    height: auto;
+    max-height: 30;
+    padding-right: 1;
+}
+
+#detail-title {
+    color: $mauve;
+    text-style: bold;
+}
+
+#detail-url {
+    color: $subtext;
+    margin-bottom: 1;
+}
+
+#detail-verdict {
+    color: $peach;
+    text-style: bold;
+    margin-top: 1;
+}
+
+#detail-what {
+    margin-top: 1;
+}
+
+#detail-why {
+    margin-top: 1;
+}
+
+#detail-conf {
+    color: $blue;
+    margin-top: 1;
+    text-style: bold;
+}
+
+#detail-conf-hint {
+    margin-top: 1;
+}
+
+.muted {
+    color: $subtext;
+}
+
+#detail-raw-title {
+    color: $mauve;
+    margin-top: 1;
+    text-style: bold;
+}
+
+#detail-raw {
+    color: $text;
+    margin-top: 1;
+}
+
+#detail-close {
+    margin-top: 1;
+    width: 100%;
+}
+
+/* --- Ad-hoc --- */
+
+#adhoc-root {
+    padding: 1 2;
+    height: 1fr;
+}
+
+#adhoc-hint {
+    color: $subtext;
+    margin-bottom: 1;
+}
+
+#adhoc-input {
+    margin-bottom: 1;
+}
+
+#adhoc-error {
+    color: $red;
+    margin-bottom: 1;
+    height: auto;
+}
+
+#adhoc-columns {
+    height: 1fr;
+}
+
+#adhoc-pending-col,
+#adhoc-recent-col {
+    width: 1fr;
+    height: 1fr;
+    border: round $overlay;
+    padding: 0 1;
+    margin-right: 1;
+}
+
+.adhoc-col-title {
+    color: $mauve;
+    text-style: bold;
+    margin-bottom: 1;
+}
+
+#adhoc-pending,
+#adhoc-recent {
+    height: 1fr;
+}
+
+#adhoc-actions {
+    height: auto;
+    margin-top: 1;
+}
+
+#adhoc-actions Button {
+    margin-right: 1;
+}
+
+/* --- Settings --- */
+
+#settings-root {
+    padding: 1 2;
+}
+
+#settings-title {
+    color: $mauve;
+    text-style: bold;
+    margin-bottom: 1;
+}
+
+.settings-section {
+    color: $blue;
+    text-style: bold;
+    margin-top: 1;
+    margin-bottom: 0;
+}
+
+#settings-preset {
+    margin-bottom: 1;
+}
+
+#settings-white,
+#settings-black {
+    height: 10;
+    margin-bottom: 1;
+}
+
+#settings-error {
+    color: $red;
+    margin-top: 1;
+    height: auto;
+}
+
+#settings-actions {
+    height: auto;
+    margin-top: 1;
+}
+
+#settings-actions Button {
+    margin-right: 1;
+}
+
+/* --- History --- */
+
+#history-root {
+    padding: 1 2;
+}
+
+#history-title {
+    color: $mauve;
+    text-style: bold;
+    margin-bottom: 1;
+}
+
+#history-mode-hint {
+    color: $yellow;
+    margin-bottom: 1;
+    height: auto;
+}
+
+#history-row {
+    height: 1fr;
+}
+
+#history-list {
+    width: 2fr;
+    border: round $overlay;
+    margin-right: 1;
+}
+
+#history-detail {
+    width: 3fr;
+    border: round $overlay;
+    padding: 0 1;
+}
+
+#history-detail-text {
+    height: auto;
+}
+
+#history-actions {
+    height: auto;
+    margin-top: 1;
+}
+
+#history-actions Button {
+    margin-right: 1;
+}
+
+/* --- Snapshot dialog --- */
+
+#snapshot-dialog {
+    width: 70;
+    height: auto;
+    padding: 1 2;
+    border: round $mauve;
+    background: $surface;
+    align: center middle;
+}
+
+#snapshot-title {
+    color: $mauve;
+    text-style: bold;
+    margin-bottom: 1;
+}
+
+#snapshot-hint {
+    margin-bottom: 1;
+    height: auto;
+}
+
+#snapshot-label {
+    margin-bottom: 1;
+}
+
+#snapshot-actions {
+    height: auto;
+    align-horizontal: right;
+}
+
+#snapshot-actions Button {
+    margin-left: 1;
+}
+
+/* --- Confirm dialog --- */
+
+#confirm-dialog {
+    width: 60;
+    height: auto;
+    padding: 1 2;
+    border: round $red;
+    background: $surface;
+    align: center middle;
+}
+
+#confirm-text {
+    margin-bottom: 1;
+    height: auto;
+}
+
+#confirm-actions {
+    height: auto;
+    align-horizontal: right;
+}
+
+#confirm-actions Button {
+    margin-left: 1;
+}
+
+/* --- Diff --- */
+
+#diff-root {
+    padding: 1 2;
+}
+
+#diff-headline {
+    color: $mauve;
+    text-style: bold;
+    margin-bottom: 0;
+}
+
+#diff-summary {
+    margin-bottom: 1;
+}
+
+.diff-section-title {
+    color: $blue;
+    text-style: bold;
+    margin-top: 1;
+    margin-bottom: 0;
+}
+
+#diff-changed,
+#diff-only-old,
+#diff-only-new {
+    height: auto;
+    margin-bottom: 1;
+}
+
+#diff-scroll {
+    height: 1fr;
+}
+
+#diff-empty {
+    margin-top: 1;
+    color: $green;
+}
+
+/* --- Results title (read-only history view) --- */
+
+#results-title {
+    color: $mauve;
+    text-style: bold;
+    margin-bottom: 1;
 }
