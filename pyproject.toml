@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "rkn-checker-tui"
-version = "1.0.0"
+version = "1.0.1"
 description = "Дружелюбный TUI поверх rkn-block-checker: меню, пресеты, история, понятные описания вердиктов."
 readme = "README.md"
 license = { text = "MIT" }
